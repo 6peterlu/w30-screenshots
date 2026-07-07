@@ -1,0 +1,83 @@
+W-30 live marketplace plugin update demo
+binary: /root/xai/target/debug/xai-grok-pager
+HOME=/tmp/w30-demo-live2/home
+
+$ cat ~/.grok/config.toml
+[[marketplace.sources]]
+name = "SpaceX Marketplace"
+path = "/tmp/w30-demo-live2/marketplace"
+
+[plugins]
+enabled = ["demo"]
+
+$ grok plugin install demo --trust
+Installed 1 plugin(s) from SpaceX Marketplace: demo
+
+$ grok plugin list --json
+[
+  {
+    "status": "installed",
+    "name": "demo",
+    "repo_key": "demo-ae78820e",
+    "version": "1.0.0",
+    "path": "/tmp/w30-demo-live2/home/.grok/installed-plugins/demo-ae78820e",
+    "source": "/tmp/w30-demo-live2/marketplace/plugins/demo",
+    "marketplace": "SpaceX Marketplace"
+  }
+]
+
+# marketplace -> 2.0.0
+$ grok plugin install demo --trust
+Updated 1 plugin(s) from SpaceX Marketplace: demo
+
+$ grok plugin list --json
+[
+  {
+    "status": "installed",
+    "name": "demo",
+    "repo_key": "demo-ae78820e",
+    "version": "2.0.0",
+    "path": "/tmp/w30-demo-live2/home/.grok/installed-plugins/demo-ae78820e",
+    "source": "/tmp/w30-demo-live2/marketplace/plugins/demo",
+    "marketplace": "SpaceX Marketplace"
+  }
+]
+
+# marketplace -> 2.1.0
+$ grok plugin update demo
+demo-ae78820e: updated (2.0.0 -> 2.1.0)
+
+$ grok plugin list --json
+[
+  {
+    "status": "installed",
+    "name": "demo",
+    "repo_key": "demo-ae78820e",
+    "version": "2.1.0",
+    "path": "/tmp/w30-demo-live2/home/.grok/installed-plugins/demo-ae78820e",
+    "source": "/tmp/w30-demo-live2/marketplace/plugins/demo",
+    "marketplace": "SpaceX Marketplace"
+  }
+]
+
+# marketplace -> 3.0.0
+$ grok plugin uninstall demo --confirm
+Uninstalled 1 plugin(s): demo
+
+$ grok plugin install demo --trust
+Installed 1 plugin(s) from SpaceX Marketplace: demo
+
+$ grok plugin list --json
+[
+  {
+    "status": "installed",
+    "name": "demo",
+    "repo_key": "demo-ae78820e",
+    "version": "3.0.0",
+    "path": "/tmp/w30-demo-live2/home/.grok/installed-plugins/demo-ae78820e",
+    "source": "/tmp/w30-demo-live2/marketplace/plugins/demo",
+    "marketplace": "SpaceX Marketplace"
+  }
+]
+
+final version: 3.0.0
